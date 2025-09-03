@@ -1,0 +1,38 @@
+General-Purpose Registers
+------------------------- 
+
+64-bit  32-bit  16-bit  8-bit(high/low)  Purpose / Usage
+RAX     EAX     AX      AH/AL            Accumulator; arithmetic, logic, I/O
+RBX     EBX     BX      BH/BL            Base; data storage, memory addressing
+RCX     ECX     CX      CH/CL            Counter for loops, string operations
+RDX     EDX     DX      DH/DL            I/O, multiplication/division
+RSI     ESI     SI      SIL              Source index for string/data operations
+RDI     EDI     DI      DIL              Destination index for string/data operations
+RBP     EBP     BP      —                Base pointer for stack frames
+RSP     ESP     SP      —                Stack pointer
+R8–R15  R8D–    R8W–    R8B–R15B         Additional general-purpose registers (64-bit only)
+        R15D    R15W 
+
+
+
+Data Movement Instructions
+--------------------------
+
+Instruction         Syntax          Purpose
+mov dest, src       mov rax, rbx    Copies data from src to dest. Can be register, memory, or immediate.
+push reg/mem        push rbp        Pushes value onto stack; decrements rsp by 8 (64-bit).
+pop reg             pop rbp         Pops value from stack into register; increments rsp by 8.
+
+
+
+Arithmetic Instructions
+-----------------------
+
+Instruction         Syntax          Purpose
+add dest, src       add rax, rbx    Adds src to dest and stores result in dest.
+sub dest, src       sub rax, rbx    Subtracts src from dest.
+mul src             mul rbx         Unsigned multiply rax * src. Result stored in rdx:rax.
+imul src            imul rbx        Signed multiply. Can store result in rax or another register.
+div src             div rbx         Unsigned divide rdx:rax / src. Quotient → rax, remainder → rdx.
+idiv src            idiv rbx        Signed division.
+
