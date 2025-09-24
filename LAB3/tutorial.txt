@@ -37,3 +37,55 @@ div src             div rbx         Unsigned divide rdx:rax / src. Quotient → 
 idiv src            idiv rbx        Signed division.
 
 cmd: nasm -f elf64 hello.asm && gcc -no-pie -o hello hello.o && ./hello
+ext: section .note.GNU-stack noalloc noexec nowrite progbits
+
+je / jz → jump if equal / zero
+
+jne / jnz → jump if not equal / not zero
+
+Unsigned Comparisons
+
+ja / jnbe → jump if above ( > )
+
+jae / jnb → jump if above or equal ( ≥ )
+
+jb / jnae → jump if below ( < )
+
+jbe / jna → jump if below or equal ( ≤ )
+
+Signed Comparisons
+
+jg / jnle → jump if greater ( > )
+
+jge / jnl → jump if greater or equal ( ≥ )
+
+jl / jnge → jump if less ( < )
+
+jle / jng → jump if less or equal ( ≤ )
+
+Special Flags
+
+jc → jump if carry
+
+jnc → jump if not carry
+
+jo → jump if overflow
+
+jno → jump if not overflow
+
+js → jump if sign set (negative)
+
+jns → jump if not sign (non-negative)
+
+jp / jpe → jump if parity even
+
+jnp / jpo → jump if parity odd
+
+Loop Instructions (with ECX counter)
+
+loop label → decrements ecx, jumps if not zero
+
+loope / loopz label → loop while ecx != 0 and ZF=1
+
+loopne / loopnz label → loop while ecx != 0 and ZF=0
+
