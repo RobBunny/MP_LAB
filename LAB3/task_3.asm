@@ -1,49 +1,61 @@
-extern    printf        
-extern    scanf        
+;Task 3:
+;Scan a variable n. Print all divisors of n.
 
-SECTION .data        
-n:          dq 0                ; The input number
-out_fmt:    db "%ld", 10, 0    ; Format to print a number + newline
-in_fmt:     db "%ld", 0        ; Format to read a number
+extern printf
+extern scanf
+
+SECTION .data
+
+a:	dq	0	
+b:  dq  0 
+
+enter:	db "Enter a number: ",0
+out_fmt:	db "%d", 10, 0
+out_fmt_2:	db "%s",10,0	
+in_fmt:		db "%d",0
 
 SECTION .text
-global main        
-
+global main
 main:
-    push    rbp
-    mov     rbp, rsp
+    push rbp
+    mov rbp, rsp
 
-    ; Read input number n
-    mov     rdi, in_fmt
-    mov     rsi, n
-    xor     rax, rax        ; Clear rax for variadic call
-    call    scanf
+	mov rax,0
+        mov rdi,out_fmt_2
+        mov rsi,enter
+        call printf
+        
+        mov rax, 0
+	mov rdi, in_fmt
+	mov rsi, a
+	call scanf	
 
-    mov     rax, [n]        ; Load n
-    mov     rsi, 1          ; Counter i = 1
+    mov rbx, 1
 
-divisor_loop:
-    cmp     rsi, rax        ; if i > n, exit loop
-    ja      end_loop
+loop_start:
+    mov rax, [a]
+    cmp rbx, rax
+    jg end
 
-    mov     rdx, 0          ; Clear rdx for div (since rdx:rax)
-    mov     r8, rsi         ; divisor i
-    mov     rax, [n]        ; dividend n
-    div     r8              ; rax = n / i, rdx = n % i
+    xor rdx, rdx
+    div rbx
+    cmp rdx, 0
+    je divisor
+    inc rbx
+    jmp loop_start
 
-    cmp     rdx, 0
-    jne     skip_print
+divisor:
+    mov	[b],rbx	
+    mov	rdi,out_fmt		
+    mov	rsi,[b]                  
+    mov	rax,0
+    call printf
+    inc rbx
+    jmp loop_start
 
-    mov     rdi, out_fmt
-    mov     rsi, rsi        ; i (loop counter)
-    xor     rax, rax        ; clear rax for variadic call
-    call    printf
-
-skip_print:
-    inc     rsi
-    jmp     divisor_loop
-
-end_loop:
-    mov     rax, 0
-    pop     rbp
+end:
+    pop rbp
+    mov rax, 0
     ret
+
+section .note.GNU-stack noalloc noexec nowrite progbits
