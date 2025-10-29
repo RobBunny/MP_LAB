@@ -1,0 +1,1 @@
+nasm -f elf64 palindrome.asm && gcc -no-pie -o palindrome palindrome.o && ./palindrome

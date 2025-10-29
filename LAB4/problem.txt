@@ -1,0 +1,37 @@
+Write a NASM program that takes two integers as input, passes them to a function sum, and prints their sum.
+
+
+
+
+Write a NASM program that reads two integers, calls a function max_of_two, and prints the larger number.
+
+
+
+Write a NASM program that reads a string, reverses it using a function reverse_str, and prints the reversed string.
+
+
+
+Write a NASM program that performs and on two matrices of the same size.
+
+
+
+
+Write a NASM program that takes a student’s name (string), three exam scores (integers), and computes: 
+
+(i)The average score (float), 
+
+(ii) The corresponding letter grade (P/F), and prints a formatted output line. Above 50% marks is P.
+
+
+
+[
+    Every function follows this typical structure:
+my_function:
+    push rbp          ; Save base pointer
+    mov rbp, rsp       ; Establish new stack frame
+    ; (Optionally) push any registers you will modify
+    ; function body
+    ; (Optionally) pop saved registers
+    pop rbp            ; Restore caller's frame pointer
+    ret                ; Return to caller
+]
