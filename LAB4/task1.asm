@@ -1,0 +1,1 @@
+;Write a NASM program that takes two integers as input, passes them to a function sum, and prints their sum.

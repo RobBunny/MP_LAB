@@ -1,0 +1,1 @@
+;Write a NASM program that reads a string, reverses it using a function reverse_str, and prints the reversed string.

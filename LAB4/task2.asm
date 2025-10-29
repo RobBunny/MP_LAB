@@ -1,0 +1,1 @@
+;Write a NASM program that reads two integers, calls a function max_of_two, and prints the larger number.
