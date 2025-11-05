@@ -25,29 +25,29 @@ main:
         call printf
         
         mov rax, 0
-	    mov rdi, in_fmt
-	    mov rsi, a
-	    call scanf	
+	mov rdi, in_fmt
+	mov rsi, a
+	call scanf	
 	
-	    mov	rax,[a]
+	mov rax,[a]
         mov rbx,0
     loop_start:
 
         xor rdx,rdx
         mov rcx,10
         div rcx
-        imul rbx, rbx, 10
+        imul rbx, 10
         add rbx, rdx
-	    cmp rax, 0
+	cmp rax, 0
         je finish
         jmp loop_start
 
     finish:
-	    mov	[b],rbx	
-	    mov	rdi,out_fmt		
-	    mov	rsi,[b]                  
-	    mov	rax,0		
-        call    printf
+	mov [b],rbx	
+	mov rdi,out_fmt		
+	mov rsi,[b]                  
+	mov rax,0		
+        call printf
         jmp end		
 
     end:
