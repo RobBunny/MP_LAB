@@ -1,0 +1,66 @@
+section .data
+    prompt db "Enter numbers (one per line, empty to stop):", 10, 0
+    array times 20 dq 0
+
+section .bss
+    input resb 20
+
+section .text
+    global _start
+
+_start:
+    mov rbp, rsp        ; Save stack pointer
+    
+    ; Display prompt
+    mov rax, 1          ; sys_write
+    mov rdi, 1          ; stdout
+    mov rsi, prompt
+    mov rdx, 43         ; length
+    syscall
+
+    mov r15, array      ; Array pointer
+    mov r14, 0          ; Counter
+
+read_numbers:
+    ; Read input
+    mov rax, 0          ; sys_read
+    mov rdi, 0          ; stdin
+    mov rsi, input
+    mov rdx, 20
+    syscall
+
+    ; Check for empty input
+    cmp byte [input], 10
+    je done_reading
+
+    ; Convert to integer
+    mov rdi, input
+    call atoi
+    mov [r15], rax
+
+    add r15, 8          ; Next array element
+    inc r14
+    cmp r14, 20         ; Max array size
+    jl read_numbers
+
+done_reading:
+    ; r14 contains number of elements read
+    ; Continue with program...
+
+; String to integer (64-bit)
+atoi:
+    xor rax, rax
+    mov rcx, 10
+.convert:
+    movzx rbx, byte [rdi]
+    cmp rbx, 10         ; Newline
+    je .done
+    cmp rbx, 0          ; Null terminator
+    je .done
+    sub rbx, '0'
+    imul rax, rcx
+    add rax, rbx
+    inc rdi
+    jmp .convert
+.done:
+    ret
